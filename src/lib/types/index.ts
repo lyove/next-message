@@ -48,4 +48,4 @@ interface TooltipOptions {
   hidingDelay?: number;
 }
 
-export { TooltipOptions, TooltipContent };
+export type { TooltipOptions, TooltipContent };
