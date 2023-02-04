@@ -4,14 +4,14 @@ Tiny tooltip library
 
 ## ⭐️ Features
 
-Hybrid support - CommonJS and ESM modules
-IIFE bundle for direct browser support without bundler
-Typings bundle
-ESLint - scripts linter
-Stylelint - styles linter
-Prettier - formatter
-Jest - test framework
-Husky + lint-staged - pre-commit git hook set up for formatting
+- Hybrid support - CommonJS and ESM modules
+- IIFE bundle for direct browser support without bundler
+- Typings bundle
+- ESLint - scripts linter
+- Stylelint - styles linter
+- Prettier - formatter
+- Jest - test framework
+- Husky + lint-staged - pre-commit git hook set up for formatting
 
 
 ## 📦 Getting Started
