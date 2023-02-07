@@ -1,6 +1,7 @@
 # NextTooltip
 
 Tiny tooltip library 
+
 [![Edit new](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/next-tooltip-zt3pvz)
 
 ## ⭐️ Features
