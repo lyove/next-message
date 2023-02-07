@@ -2,7 +2,7 @@
 
 Tiny tooltip library 
 
-[![Edit new](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/next-tooltip-mzmgxz)
+[![Edit new](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/next-tooltip-x0r368)
 
 ## ⭐️ Features
 
