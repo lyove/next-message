@@ -2,72 +2,225 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Next tooltip</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Next-Message tiny message</title>
+  <link rel="stylesheet" href="./src/index.css">
   <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-        Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    .app-wrap {
+      width: 600px;
+      margin: 0 auto
     }
 
-    #app {
-      text-align: center;
+    div.code {
+      white-space: pre;
     }
 
-    .table {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .table__row {
-      height: 50vh;
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
-    }
-
-    .item {
+    button {
+      position: relative;
       display: inline-block;
-      background: #2da0e9;
-      color: #fff;
-      border-radius: 5px;
-      padding: 13px 18px;
+      padding: 5px 16px;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 20px;
+      white-space: nowrap;
+      vertical-align: middle;
       cursor: pointer;
+      -webkit-user-select: none;
+      user-select: none;
+      border: 1px solid;
+      border-radius: 6px;
+      -webkit-appearance: none;
+      appearance: none;
+
+      color: #24292f;
+      background-color: #f6f8fa;
+      border-color: rgba(27, 31, 36, 0.15);
+      box-shadow: 0 1px 0 rgba(27, 31, 36, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+      transition: 80ms cubic-bezier(0.33, 1, 0.68, 1);
     }
 
-    .item:hover {
-      background: #1689d2;
+    button:hover {
+      background-color: hsla(220, 14%, 94%, 1);
+      /* transform: scale(1.05); */
+    }
+
+    h1 span {
+      float: right;
+      margin-top: 6px;
     }
   </style>
+  <link href="https://unpkg.com/prismjs@1.23.0/themes/prism-okaidia.css" rel="stylesheet" />
+  <script src="https://unpkg.com/prismjs@1.23.0/prism.js"></script>
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+  <script src="./src/index.js"></script>
 </head>
 
 <body>
-  <div id="app">
-    <h1>Next-Tooltip</h1>
-    <a href="https://github.com/meta-explore/next-tooltip" target="_blank">
-      Next-tooltip Github
-    </a>
-  </div>
-  <div class="table__row">
-    <span class="item" data-placement="bottom">Bottom</span>
-    <span class="item" data-placement="top">Top</span>
-  </div>
-  <div class="table__row">
-    <span class="item" data-placement="left">Left</span>
-    <span class="item" data-placement="right">Right</span>
-  </div>
-  <script type="module">
-    import Tooltip from "./src/index.ts";
+  <div class="app-wrap">
+    <h1>
+      Next-Message
+      <a 
+        class="github-button" 
+        href="https://github.com/lyove/next-message"
+        data-color-scheme="no-preference: light; light: light; dark: dark;" 
+        data-size="large" 
+        data-show-count="true"
+        aria-label="Star lyove/next-message on GitHub"
+      >
+        Star
+      </a>
+    </h1>
+    <p style="color: darkgray;">
+      A lightweight feedback message appearing at the top of the screen, fading automatically. Has many different options for different situations.
+    </p>
+    <p>
+      <a href="https://github.com/lyove/next-message/blob/main/README.md">Doc</a>
+    </p>
 
-    const tooltip = new Tooltip();
-    const items = document.getElementsByClassName("item");
-    Array.from(items).forEach((item) => {
-      tooltip.onHover(item, "Some text", {
-        placement: item.dataset.placement,
-      });
-    });
+    <h3>Install</h3>
+    <pre><code class="language-markup">$ yarn add next-message</code></pre>
+    <h3>Use</h3>
+    <pre><code class="language-js">import $message from 'next-message';
+import 'next-message/index.css';</code></pre>
+    <h3>Example</h3>
+    <button onclick="info()">info</button>
+    <button onclick="success()">success</button>
+    <button onclick="warning()">warning</button>
+    <button onclick="error()">error</button>
+    <button onclick="loading()">loading</button>
+    <pre><code class="language-js">$message.info('info message')
+$message.success('success message')
+$message.warning('warning message')
+$message.error('error message')
+$message.loading('loading...')</code></pre>
+
+
+    <button onclick="objectFn()">object</button>
+    <pre><code class="language-js">$message.info({
+    content: 'string message'
+})</code></pre>
+    <button onclick="closeBtn()">close</button>
+    <button onclick="closeBtnByHand()">close manually</button>
+    <pre><code class="language-js">$message.info('This is a message with a close button',{
+    onClose:() => console.log('close'),
+    closable: true,
+    duration: 2
+})
+
+$message.info('This is a message with a manual close button',{
+    onClose:() => console.log('close'),
+    closable: true,
+    duration: 0
+})</code></pre>
+    <button onclick="config()">config</button>
+    <pre><code class="language-js">$message.config({
+    top:85,
+    duration: 4
+})</code></pre>
+    <button onclick="destroy()">destroy</button>
+    <pre><code class="language-js">$message.destroy()</code></pre>
+    <button onclick="configSingleton()">configSingleton</button>
+    <button onclick="info()">singleton</button>
+    <pre><code class="language-js">$message.config({
+    singleton:true
+})
+$message.info('this singe message')</code></pre>
+    <button onclick="safeUseHtml()">defaultDnagerUseHtml</button>
+    <button onclick="dangerUseHtml()">dangerUseHtml</button>
+    <div style="margin-top: 8px">
+      <textarea id="text" style="width:100%; height:50px"></textarea>
+    </div>
+    </pre>
+    <pre><code class="language-js">// default
+$message.info(htmlStr,{ duration: 0, closable: true })
+// dangerUseHtml may lead to XSS attacks
+$message.info(htmlStr,{
+    dangerUseHtml: true,
+    duration: 0,
+    closable: true
+})</code></pre>
+
+  </div>
+  <script>
+    function info() {
+      $message.info('This is a info message')
+    }
+
+    function success() {
+      $message.success('This is a success message')
+    }
+
+    function warning() {
+      $message.warning('This is a warning message')
+    }
+
+    function error() {
+      $message.error('This is a error message')
+    }
+
+    function loading() {
+      $message.loading('loading...')
+    }
+
+    function objectFn() {
+      $message.info({
+        content: `I'm string`
+      })
+    }
+
+    function closeBtnByHand() {
+      $message.info(
+        'This is a message with manual closing button',
+        {
+          onClose: () => console.log('close'),
+          closable: true,
+          duration: 0
+        })
+    }
+
+    function closeBtn() {
+      $message.info(
+        'This is a message with closing button',
+        {
+          onClose: () => console.log('close'),
+          closable: true,
+          duration: 2
+        })
+    }
+    function config() {
+      $message.config({
+        top: 85,
+        duration: 4
+      })
+    }
+
+    function destroy() {
+      $message.destroy()
+    }
+
+    function configSingleton() {
+      $message.config({
+        singleton: true
+      })
+    }
+    function safeUseHtml() {
+      $message.info('This a message <span style="color:red">red</span><iframe style="width:0;height:0" src="javascript:alert()"><\/iframe>', {
+        duration: 0,
+        closable: true,
+      })
+    }
+    function dangerUseHtml() {
+      $message.warning('This is a message <span style="color:red">red</span><iframe style="width:0;height:0" src="javascript:alert()"><\/iframe>', {
+        dangerUseHtml: true,
+        closable: true,
+        duration: 0
+      })
+    }
+
+    const txthtml = `const htmlStr = "This is a message <span style='color:red'>red</span><iframe style='width:0;height:0' src='javascript:alert()''>/iframe>"`
+    document.querySelector('#text').value = txthtml;
   </script>
 </body>
 
