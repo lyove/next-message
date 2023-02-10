@@ -1,18 +1,19 @@
 {
-  "name": "next-tooltip",
+  "name": "next-message",
   "private": true,
   "version": "0.0.1",
-  "main": "./dist/next-tooltip.cjs",
-  "module": "./dist/next-tooltip.mjs",
+  "main": "./dist/next-message.cjs",
+  "module": "./dist/next-message.mjs",
   "exports": {
     ".": {
-      "require": "./dist/next-tooltip.cjs",
-      "import": "./dist/next-tooltip.mjs"
+      "require": "./dist/next-message.cjs",
+      "import": "./dist/next-message.mjs"
     }
   },
-  "author": "lyove <lyove@outlook.com>",
-  "repository": "https://github.com/meta-explore/next-tooltip.git",
-  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lyove/next-message.git"
+  },
   "scripts": {
     "dev": "vite --host",
     "build": "tsc && vite build && dts-bundle-generator --config ./dts-bundle-generator.config.ts",
