@@ -1,6 +1,6 @@
-# NextTooltip
+# NextMessage
 
-Tiny tooltip library 
+Tiny message library 
 
 [![Edit new](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/next-message-t7v7vw)
 
@@ -19,15 +19,15 @@ Tiny tooltip library
 ## 📦 Getting Started
 
 ```
-git clone https://github.com/meta-explore/next-tooltip.git
+git clone https://github.com/lyove/next-message.git
 npm install
 ```
 
 ### 💎 npm
 
 ```
-import NextTooltip from 'next-tooltip';
-const tooltip = new NextTooltip();
+import NextMessage from 'next-message';
+const message = new NextMessage();
 ...
 ```
 
@@ -36,11 +36,11 @@ const tooltip = new NextTooltip();
 ```
 <script src="build/index.js"></script>
 
-const NextTooltip = window.NextTooltip.default;
-const tooltip = new NextTooltip();
+const NextMessage = window.NextMessage;
+const message = new NextMessage();
 ...
 ```
 
 ## ✅ About
 
-- [Next-Tooltip](https://github.com/meta-explore/next-tooltip) - Next-Tooltip
+- [Next-Message](https://github.com/lyove/next-message) - Next-Message
