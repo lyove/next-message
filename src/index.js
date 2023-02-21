@@ -215,7 +215,7 @@ class Message {
    * @return {String} contentBoxId
    */
   _getContentBoxId() {
-    const id = "messageBox" + Math.random();
+    const id = `messageBox-${ Math.random()}`;
     return document.getElementById(id) ? this._getContentBoxId() : id;
   }
 
