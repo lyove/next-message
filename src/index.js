@@ -58,11 +58,11 @@ class Message {
    */
   _message(type, args) {
     let options = { ...args[1] };
-    // string
+    // string, e.g $message.info("This is a message")
     if (typeof args[0] === "string") {
       options.content = args[0];
     }
-    // object
+    // object, , e.g $message.info({ content: "message", closable: true })
     if (args.length === 1 && typeof args[0] === "object") {
       options = args[0];
     }
