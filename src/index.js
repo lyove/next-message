@@ -62,7 +62,7 @@ class Message {
     if (typeof args[0] === "string") {
       options.content = args[0];
     }
-    // object, , e.g $message.info({ content: "message", closable: true })
+    // object, e.g $message.info({ content: "message", closable: true })
     if (args.length === 1 && typeof args[0] === "object") {
       options = args[0];
     }
