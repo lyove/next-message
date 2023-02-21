@@ -16,7 +16,7 @@ A lightweight feedback message appearing at the top of the screen, fading automa
 2. UI Beautiful，Reference iview UI styles。
 
 ## Install
-1. use unpkg cdn [link](https://unpkg.com/browse/next-message@1.0.0/index.js)
+1. use unpkg cdn [link](https://unpkg.com/browse/next-message@0.0.1/index.js)
 
 ```HTML
 <script src="https://unpkg.com/next-message/index.js"></script>
