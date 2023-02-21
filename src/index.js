@@ -9,21 +9,27 @@ class Message {
     };
     this._contentBoxId = this._getContentBoxId();
   }
+  
   info() {
     return this._message("info", arguments);
   }
+  
   success() {
     return this._message("success", arguments);
   }
+  
   warning() {
     return this._message("warning", arguments);
   }
+  
   error() {
     return this._message("error", arguments);
   }
+  
   loading() {
     return this._message("loading", arguments);
   }
+  
   config({
     top = this._default.top,
     duration = this._default.duration,
@@ -36,6 +42,7 @@ class Message {
     };
     this._setContentBoxTop();
   }
+  
   destroy() {
     const contentBox = document.getElementById(this._contentBoxId);
     if (contentBox) {
@@ -221,6 +228,7 @@ class Message {
       contentBox.style.top = this._default.top + "px";
     }
   }
+  
   /**
    * @description: Restore defaults
    */
