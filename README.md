@@ -6,8 +6,6 @@
 [![release](https://img.shields.io/github/release/lyove/next-message)](https://github.com/lyove/next-message/releases)
 
 
-
-
 A lightweight feedback message appearing at the top of the screen, fading automatically. Has many different options for different situations.
 
 [![Edit new](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/next-message-t7v7vw)
