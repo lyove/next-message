@@ -10,8 +10,6 @@
 }
 
 .i-message-box {
-  padding: 7px;
-  overflow: hidden;
   box-sizing: content-box;
   text-align: center;
   transition: height .3s ease-in-out, padding .3s ease-in-out;
