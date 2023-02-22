@@ -77,36 +77,6 @@ class Message {
   }
 
   /**
-   * @description: render message
-   * @param {String} content
-   * @param {Number} duration
-   * @param {String} type
-   */
-  _render(
-    content = "",
-    duration = this._default.duration,
-    type = "info",
-    onClose = () => {},
-    closable = false,
-    dangerUseHtml = this._default.dangerUseHtml
-  ) {
-    // message dom
-    const messageDOM = this._getMsgHtml(type, content, dangerUseHtml);
-    // append
-    const contentBox = this._getContentBox();
-    this._default.singleton && (contentBox.innerHTML = "");
-    contentBox.appendChild(messageDOM);
-    // remove
-    const remove = () => this._removeMsg(contentBox, messageDOM, onClose);
-    let removeTimer;
-    if (duration !== 0) {
-      removeTimer = setTimeout(remove, duration * 1000);
-    }
-    // close
-    closable && this._addClosBtn(messageDOM, remove, removeTimer);
-  }
-
-  /**
    * @description: remove
    * @param {Element} contentBox
    * @param {Element} messageDOM
@@ -237,6 +207,36 @@ class Message {
       top: 16,
       duration: 2,
     };
+  }
+  
+  /**
+   * @description: render message
+   * @param {String} content
+   * @param {Number} duration
+   * @param {String} type
+   */
+  _render(
+    content = "",
+    duration = this._default.duration,
+    type = "info",
+    onClose = () => {},
+    closable = false,
+    dangerUseHtml = this._default.dangerUseHtml
+  ) {
+    // message dom
+    const messageDOM = this._getMsgHtml(type, content, dangerUseHtml);
+    // append
+    const contentBox = this._getContentBox();
+    this._default.singleton && (contentBox.innerHTML = "");
+    contentBox.appendChild(messageDOM);
+    // remove
+    const remove = () => this._removeMsg(contentBox, messageDOM, onClose);
+    let removeTimer;
+    if (duration !== 0) {
+      removeTimer = setTimeout(remove, duration * 1000);
+    }
+    // close
+    closable && this._addClosBtn(messageDOM, remove, removeTimer);
   }
 }
 
