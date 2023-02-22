@@ -173,7 +173,7 @@ class Message {
         const contentBox = document.createElement("div");
         contentBox.id = this._contentBoxId;
         contentBox.classList.add("next-message");
-        contentBox.style.top = this._default.top + "px";
+        contentBox.style.top = Number(this._default.top) ? `${this._default.top}px` : this._default.top || "20%";
         document.body.appendChild(contentBox);
         return contentBox;
       })()
