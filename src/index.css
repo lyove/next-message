@@ -6,7 +6,7 @@
   color: #515a6e;
   pointer-events: none;
   -webkit-font-smoothing: antialiased;
-  z-index: 999;
+  z-index: 9999;
 }
 
 .i-message-box {
