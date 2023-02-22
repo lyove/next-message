@@ -1,12 +1,12 @@
 .next-message {
-  font-size: 14px;
   position: fixed;
-  z-index: 4005;
   width: 100%;
   left: 0;
+  font-size: 14px;
   color: #515a6e;
   pointer-events: none;
   -webkit-font-smoothing: antialiased;
+  z-index: 999;
 }
 
 .i-message-box {
@@ -16,18 +16,19 @@
 }
 
 .i-message-message {
+  position: relative;
   display: inline-block;
+  padding: 16px;
+  background: #fff;
   pointer-events: all;
-  padding: 8px 16px;
   border-radius: 4px;
   box-shadow: 0 1px 6px rgb(0 0 0 / 20%);
-  background: #fff;
-  position: relative;
 }
 
 .i-message-message .i-message-content-text,
 svg {
   display: inline-block;
+  text-align: center;
   font-style: normal;
   font-weight: 400;
   font-variant: normal;
@@ -36,7 +37,6 @@ svg {
   line-height: 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
 }
 
 .i-message-message svg {
@@ -47,12 +47,12 @@ svg {
 }
 
 .i-message-message svg.i-message-btn {
-  cursor: pointer;
-  color: #999;
   width: 14px;
   height: 14px;
   margin: 0;
   margin-left: 10px;
+  cursor: pointer;
+  color: #999;
 }
 
 .i-message-message svg.i-message-btn:hover {
