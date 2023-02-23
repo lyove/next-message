@@ -11,13 +11,13 @@
 
 .i-message-box {
   box-sizing: content-box;
-  text-align: center;
   transition: height .3s ease-in-out, padding .3s ease-in-out;
 }
 
-.i-message-message {
+.i-message {
   position: relative;
-  display: inline-block;
+  max-width: 460px;
+  margin: 0 auto;
   padding: 16px;
   background: #fff;
   pointer-events: all;
@@ -25,9 +25,29 @@
   box-shadow: 0 1px 6px rgb(0 0 0 / 20%);
 }
 
-.i-message-message .i-message-content-text,
-.i-message-message svg {
+.i-message .i-message-content {
+  margin: 0 24px;
+  text-align: center;
+}
+
+.i-message .i-message-icon {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+}
+
+.i-message .i-message-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+}
+
+.i-message .i-message-icon svg,
+.i-message .i-message-close svg {
   display: inline-block;
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
   text-align: center;
   font-style: normal;
   font-weight: 400;
@@ -37,29 +57,20 @@
   line-height: 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-.i-message-message svg {
-  width: 16px;
-  height: 16px;
-  margin-right: 4px;
-  vertical-align: middle;
-}
-
-.i-message-message svg.i-message-btn {
-  width: 14px;
-  height: 14px;
-  margin: 0;
-  margin-left: 10px;
   cursor: pointer;
-  color: #999;
 }
 
-.i-message-message svg.i-message-btn:hover {
-  color: #444;
+.i-message .i-message-close svg {
+  color: #777;
+  fill: #777;
 }
 
-.i-message-message svg.loading {
+.i-message .i-message-close svg:hover {
+  color:#353535;
+  fill: #353535;
+}
+
+.i-message .i-message-icon .icon-loading {
   animation: loading 1.8s linear infinite;
 }
 
