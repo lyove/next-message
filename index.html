@@ -73,7 +73,8 @@
       </a>
     </h1>
     <p style="color: darkgray;">
-      A lightweight feedback message appearing at the top of the screen, fading automatically. Has many different options for different situations.
+      A lightweight feedback message appearing at the top of the screen, fading automatically. Has many different
+      options for different situations.
     </p>
     <p>
       <a href="https://github.com/lyove/next-message/blob/master/README.md">Doc</a>
@@ -95,13 +96,36 @@ $message.success('success message')
 $message.warning('warning message')
 $message.error('error message')
 $message.loading('loading...')</code></pre>
+    <br />
 
+    <button onclick="destroy()">destroy</button>
+    <pre><code class="language-js">$message.destroy()</code></pre>
+    <br />
+
+    <button onclick="update()">update</button>
+    <pre><code class="language-js">$message.info('This is a message',{
+      key: 'msg-update',
+      onClose:() => console.log('close'),
+      closable: true,
+      duration: 10
+});
+setTimeout(() => {
+  $message.update({
+    key: 'msg-update', 
+    content: 'This is a updated message'
+  });
+}, 1500);
+
+</code></pre>
+    <br />
 
     <button onclick="objectFn()">object</button>
     <pre><code class="language-js">$message.info({
     content: 'string message'
 })</code></pre>
-    <button onclick="closeBtn()">close</button>
+    <br />
+
+    <button onclick="closeBtn()">closable</button>
     <button onclick="closeBtnByHand()">close manually</button>
     <pre><code class="language-js">$message.info('This is a message with a close button',{
     onClose:() => console.log('close'),
@@ -114,30 +138,11 @@ $message.info('This is a message with a manual close button',{
     closable: true,
     duration: 0
 })</code></pre>
-    <button onclick="config()">config</button>
-    <pre><code class="language-js">$message.config({
-    top:85,
-    duration: 4
-})</code></pre>
-    <button onclick="destroy()">destroy</button>
-    <pre><code class="language-js">$message.destroy()</code></pre>
-    <button onclick="configSingleton()">configSingleton</button>
-    <button onclick="info()">singleton</button>
-    <pre><code class="language-js">$message.config({
-    singleton:true
-})
-$message.info('this singe message')</code></pre>
+    <br />
+
     <button onclick="safeUseHtml()">defaultDnagerUseHtml</button>
-    <button onclick="dangerUseHtml()">dangerUseHtml</button>
-    <div style="margin-top: 8px">
-      <textarea id="text" style="width:100%; height:50px"></textarea>
-    </div>
-    </pre>
     <pre><code class="language-js">// default
-$message.info(htmlStr,{ duration: 0, closable: true })
-// dangerUseHtml may lead to XSS attacks
-$message.info(htmlStr,{
-    dangerUseHtml: true,
+$message.info('This a message &lt;span style="color:red"&gt;red color&lt;/span&gt;',{
     duration: 0,
     closable: true
 })</code></pre>
@@ -162,6 +167,25 @@ $message.info(htmlStr,{
 
     function loading() {
       $message.loading('loading...')
+    }
+
+    function update() {
+      $message.info('This is a message',{
+        key: 'msg-update',
+        onClose:() => console.log('close'),
+        closable: true,
+        duration: 10
+      });
+      setTimeout(() => {
+        $message.update({
+          key: 'msg-update', 
+          content: 'This is a updated message'
+        });
+      }, 1500);
+    }
+
+    function destroy() {
+      $message.destroy()
     }
 
     function objectFn() {
@@ -189,38 +213,13 @@ $message.info(htmlStr,{
           duration: 2
         })
     }
-    function config() {
-      $message.config({
-        top: 85,
-        duration: 4
-      })
-    }
 
-    function destroy() {
-      $message.destroy()
-    }
-
-    function configSingleton() {
-      $message.config({
-        singleton: true
-      })
-    }
     function safeUseHtml() {
-      $message.info('This a message <span style="color:red">red</span><iframe style="width:0;height:0" src="javascript:alert()"><\/iframe>', {
+      $message.info('This a message <span style="color:red">red color</span>', {
         duration: 0,
         closable: true,
       })
     }
-    function dangerUseHtml() {
-      $message.warning('This is a message <span style="color:red">red</span><iframe style="width:0;height:0" src="javascript:alert()"><\/iframe>', {
-        dangerUseHtml: true,
-        closable: true,
-        duration: 0
-      })
-    }
-
-    const txthtml = `const htmlStr = "This is a message <span style='color:red'>red</span><iframe style='width:0;height:0' src='javascript:alert()''>/iframe>"`
-    document.querySelector('#text').value = txthtml;
   </script>
 </body>
 
