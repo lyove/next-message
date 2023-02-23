@@ -104,10 +104,10 @@ $message.loading('loading...')</code></pre>
 
     <button onclick="update()">update</button>
     <pre><code class="language-js">$message.info('This is a message',{
-      key: 'msg-update',
-      onClose:() => console.log('close'),
-      closable: true,
-      duration: 10
+  key: 'msg-update',
+  onClose:() => console.log('close'),
+  closable: true,
+  duration: 10
 });
 setTimeout(() => {
   $message.update({
