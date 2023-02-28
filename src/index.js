@@ -135,17 +135,20 @@ class Message {
 
   /**
    * @description: new close btn
-   * @param {Element} messageDOM
+   * @param {Element} messageBoxDOM
    */
-  _addClosBtn(messageDOM, remove, removeTimer) {
+  _addClosBtn(messageBoxDOM, remove, removeTimer) {
     const closeSvg = `<svg class="close" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>`;
-    const closBtn = new DOMParser().parseFromString(closeSvg, "text/html").body
+    const domparser = new DOMParser();
+    const closBtn = domparser.parseFromString(closeSvg, "text/html").body
       .childNodes[0];
     closBtn.onclick = () => {
       removeTimer && clearTimeout(removeTimer);
       remove();
     };
-    messageDOM.querySelector(`.${this._prefixCls}-close`).appendChild(closBtn);
+    messageBoxDOM
+      .querySelector(`.${this._prefixCls}-close`)
+      .appendChild(closBtn);
   }
 
   /**
@@ -191,9 +194,9 @@ class Message {
     messageBoxDOM.className = `${this._prefixCls}-box animate__animated animate__fadeInDown`;
     messageBoxDOM.setAttribute("data-key", key);
 
-    // message dom
-    const messageDom = document.createElement("div");
-    messageDom.className = `${this._prefixCls}`;
+    // // message dom
+    // const messageDom = document.createElement("div");
+    // messageDom.className = `${this._prefixCls}`;
 
     // message-icon dom
     const messageIconDom = document.createElement("div");
@@ -210,10 +213,9 @@ class Message {
     messageCloseDom.className = `${this._prefixCls}-close`;
 
     // append
-    messageDom.append(messageIconDom);
-    messageDom.append(messageContentDom);
-    messageDom.append(messageCloseDom);
-    messageBoxDOM.append(messageDom);
+    messageBoxDOM.append(messageIconDom);
+    messageBoxDOM.append(messageContentDom);
+    messageBoxDOM.append(messageCloseDom);
 
     return messageBoxDOM;
   }
@@ -221,17 +223,81 @@ class Message {
   /**
    * @description: remove
    * @param {Element} messageWrapper
-   * @param {Element} messageDOM
+   * @param {Element} messageBoxDOM
    * @param {Number} duration
    */
   _removeMessageBox(messageWrapper, messageBoxDOM, onClose) {
     messageBoxDOM.classList.remove("animate__fadeInDown");
-    messageBoxDOM.classList.add("animate__fadeOutUp");
-    messageBoxDOM.style.height = 0;
+    messageBoxDOM.classList.add("animate__fadeOutDown");
     setTimeout(() => {
       !this._default.single && messageWrapper.removeChild(messageBoxDOM);
       onClose();
     }, 400);
+  }
+
+  /**
+   * @description: drag message box
+   * @param {Element} messageBoxDOM
+   */
+  _dragMessageBox({ messageBoxDOM }) {
+    const dragBox = messageBoxDOM;
+    // onStart
+    dragBox.onmousedown = (downEvent) => {
+      if (downEvent.button !== 0) {
+        // Left mouse button, 0:left, 2:right
+        return false;
+      }
+
+      // The distance between the box and the page when the mouse is pressed
+      let originBoxX = dragBox.offsetLeft;
+      let originBoxY = dragBox.offsetTop;
+
+      // The distance between the mouse and the page when the mouse is pressed
+      let mouseX = downEvent.pageX;
+      let mouseY = downEvent.pageY;
+
+      // onMove
+      document.onmousemove = (moveEvent) => {
+        // Distance of mouse movement = (the position after the mouse moves) - (the position when the mouse is pressed)
+        let distanceX = moveEvent.pageX - mouseX;
+        let distanceY = moveEvent.pageY - mouseY;
+
+        // box'left & top
+        let left = originBoxX + distanceX;
+        let top = originBoxY + distanceY;
+
+        if (left <= 0) {
+          left = 0;
+        } else if (
+          left >=
+          document.documentElement.clientWidth - dragBox.offsetWidth
+        ) {
+          left = document.documentElement.clientWidth - dragBox.offsetWidth;
+        }
+
+        if (top <= 0) {
+          top = 0;
+        } else if (
+          top >=
+          document.documentElement.clientHeight - dragBox.offsetHeight
+        ) {
+          top = document.documentElement.clientHeight - dragBox.offsetHeight;
+        }
+
+        // Reassign box
+        // dragBox.style.width = width + "px";
+        dragBox.style.position = "absolute";
+        dragBox.style.left = left + "px";
+        dragBox.style.top = top + "px";
+      };
+
+      // onOver
+      document.onmouseup = () => {
+        // Unbind event
+        document.onmouseup = null;
+        document.onmousemove = null;
+      };
+    };
   }
 
   /**
@@ -260,8 +326,9 @@ class Message {
     messageWrapper.appendChild(messageBoxDOM);
 
     // remove
-    const remove = () =>
+    const remove = () => {
       this._removeMessageBox(messageWrapper, messageBoxDOM, onClose);
+    };
     let removeTimer = null;
     if (duration !== 0) {
       removeTimer = setTimeout(remove, duration * 1000);
@@ -269,6 +336,9 @@ class Message {
 
     // close
     closable && this._addClosBtn(messageBoxDOM, remove, removeTimer);
+
+    // drag
+    this._dragMessageBox({ messageBoxDOM });
   }
 }
 
