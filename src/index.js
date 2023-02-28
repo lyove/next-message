@@ -98,7 +98,8 @@ class Message {
    * @param {Number} duration
    */
   _removeMessage(messageWrapper, messageBoxDOM, onClose) {
-    messageBoxDOM.className = `${this._prefixCls}-box animate__animated animate__fadeOutUp`;
+    messageBoxDOM.classList.remove("animate__fadeInDown");
+    messageBoxDOM.classList.add("animate__fadeOutUp");
     messageBoxDOM.style.height = 0;
     setTimeout(() => {
       !this._default.single && messageWrapper.removeChild(messageBoxDOM);
