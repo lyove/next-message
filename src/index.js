@@ -6,7 +6,7 @@ class Message {
       duration: 3,
       single: false,
     };
-    this._messageWrapperId = this._makeMessageWrapperId();
+    this._messageWrapperId = this._createMessageWrapperId();
   }
 
   info() {
@@ -92,27 +92,11 @@ class Message {
   }
 
   /**
-   * @description: remove
-   * @param {Element} messageWrapper
-   * @param {Element} messageDOM
-   * @param {Number} duration
-   */
-  _removeMessage(messageWrapper, messageBoxDOM, onClose) {
-    messageBoxDOM.classList.remove("animate__fadeInDown");
-    messageBoxDOM.classList.add("animate__fadeOutUp");
-    messageBoxDOM.style.height = 0;
-    setTimeout(() => {
-      !this._default.single && messageWrapper.removeChild(messageBoxDOM);
-      onClose();
-    }, 400);
-  }
-
-  /**
    * Generate uuid
    * Globally Unique Identifier
    * @returns {string}
    */
-  _makeGuid() {
+  _createGuid() {
     return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
       /[xy]/g,
       function (c) {
@@ -168,10 +152,10 @@ class Message {
    * @description: Get messageWrapperId
    * @return {String} messageWrapperId
    */
-  _makeMessageWrapperId() {
+  _createMessageWrapperId() {
     const wrapperId = `messageBox-${Math.random()}`;
     return document.getElementById(wrapperId)
-      ? this._makeMessageWrapperId()
+      ? this._createMessageWrapperId()
       : wrapperId;
   }
 
@@ -179,7 +163,7 @@ class Message {
    * @description: Create element wrapper
    * @return {Element} dom object
    */
-  _makeMessageWrapper() {
+  _createMessageWrapper() {
     return (
       document.getElementById(this._messageWrapperId) ||
       (() => {
@@ -201,7 +185,7 @@ class Message {
    * @param {String} content
    * @return {Element} dom
    */
-  _makeMessageBox({ key, type, content }) {
+  _createMessageBox({ key, type, content }) {
     // message-box dom
     const messageBoxDOM = document.createElement("div");
     messageBoxDOM.className = `${this._prefixCls}-box animate__animated animate__fadeInDown`;
@@ -235,33 +219,49 @@ class Message {
   }
 
   /**
+   * @description: remove
+   * @param {Element} messageWrapper
+   * @param {Element} messageDOM
+   * @param {Number} duration
+   */
+  _removeMessageBox(messageWrapper, messageBoxDOM, onClose) {
+    messageBoxDOM.classList.remove("animate__fadeInDown");
+    messageBoxDOM.classList.add("animate__fadeOutUp");
+    messageBoxDOM.style.height = 0;
+    setTimeout(() => {
+      !this._default.single && messageWrapper.removeChild(messageBoxDOM);
+      onClose();
+    }, 400);
+  }
+
+  /**
    * @description: render message
    * @param {String} content
    * @param {Number} duration
    * @param {String} type
    */
   _render({
-    key = this._makeGuid(),
+    key = this._createGuid(),
     content = "",
     duration = this._default.duration,
     type = "info",
     onClose = () => {},
     closable = true,
   }) {
-    const messageWrapper = this._makeMessageWrapper();
+    const messageWrapper = this._createMessageWrapper();
     if (this._default.single) {
       messageWrapper.innerHTML = "";
     }
 
     // message dom
-    const messageBoxDOM = this._makeMessageBox({ key, type, content });
+    const messageBoxDOM = this._createMessageBox({ key, type, content });
 
     // append
     messageWrapper.appendChild(messageBoxDOM);
 
     // remove
     const remove = () =>
-      this._removeMessage(messageWrapper, messageBoxDOM, onClose);
+      this._removeMessageBox(messageWrapper, messageBoxDOM, onClose);
     let removeTimer = null;
     if (duration !== 0) {
       removeTimer = setTimeout(remove, duration * 1000);
