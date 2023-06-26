@@ -1,7 +1,5 @@
 # Next-Message
 
-[![travis-ci](https://api.travis-ci.com/lyove/next-message.svg?branch=main)](https://travis-ci.com/github/lyove/next-message)
-[![Coverage Status](https://coveralls.io/repos/github/lyove/next-message/badge.svg)](https://coveralls.io/github/lyove/next-message)
 [![license](https://img.shields.io/github/license/lyove/next-message)](https://github.com/lyove/next-message/blob/main/LICENSE)
 [![release](https://img.shields.io/github/release/lyove/next-message)](https://github.com/lyove/next-message/releases)
 
